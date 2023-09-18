@@ -147,5 +147,27 @@ namespace _1p_atom_carmanager.backend.core.Services
         {
             return await _contextDb.CarTypes.ToListAsync();
         }
+
+        public async Task<decimal> GetCarUsingCostByVin(GetCarUsingCostRequest info)
+        {
+            decimal finesCost = info.fines == null ? 0 : info.fines.Select(x => x.Cost).Sum();
+            Car car = await _contextDb.Cars.Where(x => x.VehicleIdentificationNumber == info.number).FirstOrDefaultAsync();
+            if (car == null)
+                throw new Exception($"Could not find car by {info.number}");
+            decimal fuelAllCost = info.fuelCost * Convert.ToDecimal(car.TotalFuelUsed);
+            decimal result = finesCost + fuelAllCost;
+            return result;
+        }
+
+        public async Task<decimal> GetCarUsingCostByLicensePlate(GetCarUsingCostRequest info)
+        {
+            decimal finesCost = info.fines == null ? 0 : info.fines.Select(x => x.Cost).Sum();
+            Car car = await _contextDb.Cars.Where(x => x.LicensePlate == info.number).FirstOrDefaultAsync();
+            if (car == null)
+                throw new Exception($"Could not find car by {info.number}");
+            decimal fuelAllCost = info.fuelCost * Convert.ToDecimal(car.TotalFuelUsed);
+            decimal result = finesCost + fuelAllCost;
+            return result;
+        }
     }
 }

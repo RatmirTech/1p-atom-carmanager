@@ -14,4 +14,6 @@ public interface ICarManagerService
     Task<Car> GetCarByLicensePlate(string licensePlate);
     Task<string> AddCarType(string type);
     Task<List<CarType>> GetCarTypes();
+    Task<decimal> GetCarUsingCostByVin(GetCarUsingCostRequest info);
+    Task<decimal> GetCarUsingCostByLicensePlate(GetCarUsingCostRequest info);
 }

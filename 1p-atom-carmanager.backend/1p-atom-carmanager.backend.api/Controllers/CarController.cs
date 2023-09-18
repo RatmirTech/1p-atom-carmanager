@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace _1p_atom_carmanager.backend.api.Controllers
 {
     [ApiController]
-    [Route("info")]
+    [Route("car")]
     public class CarController : ControllerBase
     {
         private readonly ICarManagerService _carManagerService;
@@ -35,7 +35,7 @@ namespace _1p_atom_carmanager.backend.api.Controllers
         }
 
         [HttpPost(nameof(GetCarByVin))]
-        public Task<string> RegNewCar(RegNewCarRequest car)
+        public Task<string> RegNewCar([FromForm] RegNewCarRequest car)
         {
             return _carManagerService.RegNewCar(car);
         }
@@ -47,13 +47,13 @@ namespace _1p_atom_carmanager.backend.api.Controllers
         }
 
         [HttpPut(nameof(UpdateCarInfoByLicensePlate))]
-        public Task<string> UpdateCarInfoByLicensePlate(UpdateCartInfoByLicensePlate info)
+        public Task<string> UpdateCarInfoByLicensePlate([FromForm] UpdateCartInfoByLicensePlate info)
         {
             return _carManagerService.UpdateCarInfoByLicensePlate(info);
         }
 
         [HttpPut(nameof(UpdateCarInfoByVin))]
-        public Task<string> UpdateCarInfoByVin(UpdateCartInfoByVin info)
+        public Task<string> UpdateCarInfoByVin([FromForm] UpdateCartInfoByVin info)
         {
             return _carManagerService.UpdateCarInfoByVin(info);
         }
@@ -68,6 +68,18 @@ namespace _1p_atom_carmanager.backend.api.Controllers
         public Task<List<CarType>> GetCarTypes()
         {
             return _carManagerService.GetCarTypes();
+        }
+
+        [HttpPost(nameof(GetCarUsingCostByVin))]
+        public Task<decimal> GetCarUsingCostByVin(GetCarUsingCostRequest info)
+        {
+            return _carManagerService.GetCarUsingCostByVin(info);
+        }
+
+        [HttpPost(nameof(GetCarUsingCostByLicensePlate))]
+        public Task<decimal> GetCarUsingCostByLicensePlate(GetCarUsingCostRequest info)
+        {
+            return _carManagerService.GetCarUsingCostByLicensePlate(info);
         }
     }
 }
