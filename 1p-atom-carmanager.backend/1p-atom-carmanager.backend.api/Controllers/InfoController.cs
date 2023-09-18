@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using _1p_atom_carmanager.backend.core.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace _1p_atom_carmanager.backend.api.Controllers
 {
@@ -7,16 +8,18 @@ namespace _1p_atom_carmanager.backend.api.Controllers
     public class InfoController : ControllerBase
     {
         private readonly ILogger<InfoController> _logger;
-        public InfoController(ILogger<InfoController> logger)
+        private readonly ICarManagerService _carManagerService;
+        public InfoController(ILogger<InfoController> logger, ICarManagerService carManagerService)
         {
             _logger = logger;
+            _carManagerService = carManagerService;
         }
 
         [HttpGet(nameof(Get))]
         public string Get()
         {
-            _logger.LogInformation("Ping");
-            return "pong";
+            _logger.LogInformation("Pong");
+            return "Pong";
         }
     }
 }

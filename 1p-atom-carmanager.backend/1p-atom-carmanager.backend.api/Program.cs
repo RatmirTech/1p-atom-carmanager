@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.DataProtection;
+﻿using _1p_atom_carmanager.backend.core;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,10 +26,10 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
 #region[Swagger]
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MpfinApi", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Atom FMS 1P", Version = "v1" });
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    var filePath = Path.Combine(AppContext.BaseDirectory, "AtomFMS.xml");
+    //c.IncludeXmlComments(filePath);
 });
 #endregion
 
@@ -43,40 +43,19 @@ builder.Services.AddDataProtection()
 //end ключ безопасности
 #endregion
 
-#region[Identity]
-builder.Services.AddAuthorization();
-/*builder.Services.AddIdentity<User, IdentityRole>(options =>
-{
-    options.User.RequireUniqueEmail = true;    // óíèêàëüíûé email
-    options.SignIn.RequireConfirmedEmail = false;
-    options.Password.RequiredLength = 4;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequireNonAlphanumeric = false;
-
-    options.User.AllowedUserNameCharacters =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-}).AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();*/
-#endregion
-
 #region[Cors]
-var defaultOrigin = "_defaultOrigin";
-string[] origins = { "http://localhost:3000" };
-builder.Services.AddCors(o => o.AddPolicy(defaultOrigin, builder =>
-{
-    builder.WithOrigins(origins)
-    .AllowAnyMethod()
-    .AllowAnyHeader().AllowCredentials();
-}));
+//var defaultOrigin = "_defaultOrigin";
+//string[] origins = { "http://localhost:3000" };
+//builder.Services.AddCors(o => o.AddPolicy(defaultOrigin, builder =>
+//{
+//    builder.WithOrigins(origins)
+//    .AllowAnyMethod()
+//    .AllowAnyHeader().AllowCredentials();
+//}));
 #endregion
 
-#region[Cookie]
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-});
+#region[Db and Core]
+builder.Services.AddCore(builder.Configuration["ConnectionString"]);
 #endregion
 
 var app = builder.Build();
@@ -93,7 +72,7 @@ app.UseExceptionHandler(c => c.Run(async context =>
     await context.Response.WriteAsJsonAsync(response);
 }));
 
-app.UseCors(defaultOrigin);
+//app.UseCors(defaultOrigin);
 app.UseAuthentication();
 
 app.UseHttpsRedirection();
