@@ -1,7 +1,13 @@
 ﻿namespace _1p_atom_carmanager.backend.core.Entities;
 
+/// <summary>
+/// Машина
+/// </summary>
 public class Car
 {
+    /// <summary>
+    /// ID
+    /// </summary>
     public Guid Id { get; set; } = Guid.Empty;
 
     /// <summary>
@@ -9,12 +15,24 @@ public class Car
     /// </summary>
     public string LicensePlate { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Модель
+    /// </summary>
     public string Model { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Год выпуска
+    /// </summary>
     public DateTime Year { get; set; }
 
+    /// <summary>
+    /// Тип машины
+    /// </summary>
     public virtual CarType CarType { get; set; }
 
+    /// <summary>
+    /// Все нижеперечисленные переменные соотвествуют fmsi
+    /// </summary>
     public double VehicleImprovement { get; set; }
     public double VehicleSpeedWheelBased { get; set; }
     public double VehicleSpeedFromTachograph { get; set; }

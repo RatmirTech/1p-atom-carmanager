@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>_1p_atom_carmanager.backend.api</RootNamespace>
     <UserSecretsId>e7df07aa-695a-4ac7-9e79-e65fbfc36406</UserSecretsId>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>bin\AtomFMS.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Atom FMS 1P", Version = "v1" });
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
     var filePath = Path.Combine(AppContext.BaseDirectory, "AtomFMS.xml");
-    //c.IncludeXmlComments(filePath);
+    c.IncludeXmlComments(filePath);
 });
 #endregion
 

@@ -5,6 +5,9 @@ using AutoMapper;
 namespace _1p_atom_carmanager.backend.core.Mapping;
 public class AppMappingProfile : Profile
 {
+    /// <summary>
+    /// Профайл для маппинга запросов и сущностей
+    /// </summary>
     public AppMappingProfile()
     {
         CreateMap<RegNewCarRequest, Car>()

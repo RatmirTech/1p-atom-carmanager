@@ -1,5 +1,10 @@
-﻿namespace _1p_atom_carmanager.backend.core.Requests
+﻿using _1p_atom_carmanager.backend.core.Entities;
+namespace _1p_atom_carmanager.backend.core.Requests
 {
+    /// <summary>
+    /// Добавить новую машину
+    /// Коммменты смотреть на <see cref="Car"/>
+    /// </summary>
     public class RegNewCarRequest
     {
         public string LicensePlate { get; set; } = string.Empty;
@@ -33,6 +38,10 @@
         public double ServiceDistance { get; set; }
         public double EngineCoolantTemperature { get; set; }
     }
+    /// <summary>
+    /// Добавить инфу по тахографу
+    /// <see cref="TachographInfo"/>
+    /// </summary>
     public class RegCarTachographInfo
     {
         public double VehicleSpeed { get; set; }

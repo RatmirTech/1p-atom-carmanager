@@ -1,5 +1,10 @@
-﻿namespace _1p_atom_carmanager.backend.core.Requests
+﻿using _1p_atom_carmanager.backend.core.Entities;
+namespace _1p_atom_carmanager.backend.core.Requests
 {
+    /// <summary>
+    /// Обновить данные машины
+    /// Коммменты смотреть на <see cref="Car"/>
+    /// </summary>
     public class UpdateCartInfoByLicensePlate
     {
         public string LicensePlate { get; set; } = string.Empty;
