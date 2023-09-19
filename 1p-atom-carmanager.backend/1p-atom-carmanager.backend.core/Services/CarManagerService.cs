@@ -322,7 +322,7 @@ namespace _1p_atom_carmanager.backend.core.Services
             decimal finesCost = info.fines == null ? 0 : info.fines.Select(x => x.Cost).Sum();
 
             //Получаем машинку по vin
-            Car car = await _contextDb.Cars.Where(x => x.VehicleIdentificationNumber == info.number).FirstOrDefaultAsync();
+            Car car = await _contextDb.Cars.Where(x => x.LicensePlate == info.number).FirstOrDefaultAsync();
             if (car == null)
             {
                 _logger.LogError($"Could not find car by {info.number}");

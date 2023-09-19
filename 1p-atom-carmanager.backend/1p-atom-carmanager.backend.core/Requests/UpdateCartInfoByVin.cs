@@ -11,8 +11,6 @@ namespace _1p_atom_carmanager.backend.core.Requests
 
         public DateTime Year { get; set; }
 
-        public string SerialNumber { get; set; } = string.Empty;
-
         public string CarType { get; set; }
 
         public double VehicleImprovement { get; set; }
